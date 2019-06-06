@@ -1,0 +1,12 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: ribbon-consumer
+   # name: ribbon-consumer2
+eureka:
+  client:
+    #服务消费端要确保具有获取服务提供者的能力，此时要确保eureka.client.fetch-registry=true这个配置为true。
+    fetch-registry: true
+    service-url:
+      defaultZone: http://peer1:8083/eureka

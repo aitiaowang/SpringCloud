@@ -1,0 +1,24 @@
+server:
+  port: 8083
+eureka:
+  server:
+    #使用eureka.server.enable-self-preservation=false来关闭保护机制，这样可以确保注册中心中不可用的实例被及时的剔除。
+    enable-self-preservation: false
+  instance:
+    hostname: peer1
+  client:
+    #当我们启动服务消费者的时候，它会发送一个REST请求给服务注册中心来获取服务注册中心上面的服务提供者列表，
+    #而Eureka Server上则会维护一份只读的服务清单来返回给客户端，这个服务清单并不是实时数据，而是一份缓存数据，默认30秒更新一次，
+    #如果想要修改清单更新的时间间隔，可以通过eureka.client.registry-fetch-interval-seconds=30来修改，单位为秒(注意这个修改是在eureka-server上来修改)。
+    #另一方面，我们的服务消费端要确保具有获取服务提供者的能力，此时要确保消费端eureka.client.fetch-registry=true这个配置为true。
+    registry-fetch-interval-seconds: 30
+    #表示是否将自己注册到Eureka Server上，默认为true
+    register-with-eureka: false
+    #表示是否从Eureka Server上获取注册信息，默认为true
+    fetch-registry: false
+    service-url:
+      defaultZone: http://peer1:8083/eureka/
+      #http://peer2:8081/eureka/
+spring:
+  application:
+    name: eureka-server1

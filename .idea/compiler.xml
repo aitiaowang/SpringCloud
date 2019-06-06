@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="BUILD_PROCESS_HEAP_SIZE" value="1000" />
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="config-server" />
+        <module name="eureka-discovery" />
+        <module name="eureka-server" />
+        <module name="feign-consumer" />
+        <module name="hystrix-dashboard" />
+        <module name="ribbon-consumer" />
+        <module name="turbine" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-gateway" target="1.8" />
+      <module name="config-server" target="1.8" />
+      <module name="eureka-discovery" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="feign-consumer" target="1.8" />
+      <module name="hystrix-dashboard" target="1.8" />
+      <module name="ribbon-consumer" target="1.8" />
+      <module name="turbine" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

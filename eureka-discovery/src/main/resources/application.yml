@@ -1,0 +1,16 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: hello-service
+eureka:
+  instance:
+    #定义服务失效时间，默认为90秒(如果不修改默认值,则不用配置)
+    lease-expiration-duration-in-seconds: 90
+    #定义服务续约的间隔时间，默认为30秒。
+    lease-renewal-interval-in-seconds: 30
+  client:
+    service-url:
+      #在两个注册中心注册
+      defaultZone: http://peer1:8083/eureka
+      #,http://peer2:8081/eureka

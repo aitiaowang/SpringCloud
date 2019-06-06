@@ -1,0 +1,17 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          #\u914D\u7F6E\u4E2D\u5FC3\u6240\u5728\u4ED3\u5E93\u7684\u4F4D\u7F6E
+          uri: https://github.com/aitiaowang/springcloud.git
+          #\u4ED3\u5E93\u4E0B\u7684\u5B50\u76EE\u5F55
+          search-paths: config-repo
+          #GitHub\u7528\u6237\u540D
+          username: username
+          #GitHub\u5BC6\u7801
+          password: password

@@ -1,0 +1,75 @@
+#Feign为每一个FeignClient都提供了一个feign.Logger实例，我们可以在配置中开启日志，开启方式很简单，分两步：
+#第一步：application.properties中配置日志输出
+#application.properties中配置如下内容，表示设置日志输出级别：
+# 开启日志 格式为logging.level.+Feign客户端路径
+logging:
+  level:
+    com:
+      example:
+        FeignService: info
+
+server:
+  port: 8008
+spring:
+  application:
+    name: feign-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8083/eureka
+  # Feign中 Ribbon配置,Feign是对Ribbon和Hystrix的整合
+ribbon:
+  # 设置连接超时时间
+  ConnectTimeout: 600
+  # 设置读取超时时间
+  ReadTimeout: 6000
+  # 对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+  # 切换实例的重试次数
+  MaxAutoRetriesNextServer: 2
+  # 对当前实例的重试次数
+  MaxAutoRetries: 1
+  #针对不同的服务配置不同的连接超时和读取超时，那么我们可以在属性的前面加上服务的名字，如下：
+  #设置针对hello-service服务的连接超时时间
+  #ello-service.ribbon.ConnectTimeout=600
+  # 设置针对hello-service服务的读取超时时间
+  #hello-service.ribbon.ReadTimeout=6000
+  # 设置针对hello-service服务所有操作请求都进行重试
+  #hello-service.ribbon.OkToRetryOnAllOperations=true
+  # 设置针对hello-service服务切换实例的重试次数
+  #hello-service.ribbon.MaxAutoRetriesNextServer=2
+  # 设置针对hello-service服务的当前实例的重试次数
+  #hello-service.ribbon.MaxAutoRetries=1
+
+# Feign中 Hystrix配置(全局配置)
+hystrix:
+  # 设置熔断超时时间
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+        # 关闭熔断功能
+        timeout:
+          enabled: false
+# Feign中 关闭Hystrix功能（不要和上面的配置(熔断超时时间)一起使用）
+feign:
+  hystrix:
+    enabled: false
+
+  #Hystrix针对某一个接口配置，比如/hello接口，那么可以按照下面这种写法，如下：
+  # 设置熔断超时时间
+  #hystrix.command.hello.execution.isolation.thread.timeoutInMilliseconds=10000
+  # 关闭熔断功能
+  #hystrix.command.hello.execution.timeout.enabled=false
+
+#Spring Cloud Feign支持对请求和响应进行GZIP压缩，以提高通信效率，配置方式如下：
+  # 配置请求GZIP压缩
+#feign.compression.request.enabled=true
+  # 配置响应GZIP压缩
+#feign.compression.response.enabled=true
+  # 配置压缩支持的MIME TYPE
+#feign.compression.request.mime-types=text/xml,application/xml,application/json
+  # 配置压缩数据大小的下限
+#feign.compression.request.min-request-size=2048

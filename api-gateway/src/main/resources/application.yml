@@ -1,0 +1,41 @@
+# 基础信息配置
+server:
+  port: 8090
+spring:
+  application:
+    name: api-gateway
+
+# 路由规则配置
+zuul:
+  #为路由规则增加前缀,此时我们的访问路径就变成了http://localhost:8090/myapi/feign-consumer/hello1。
+  prefix: /myapi
+  #不给/hello接口路由,此时访问/hello接口就会报404错误
+  ignored-patterns: /**/hello/**
+  routes:
+    # 配置路由规则所有符合/api-a/**的请求都将被转发到feign-consumer服务上
+    api-a.path: /api-a/**
+    api-a.serviceId: feign-consumer
+    #zuul.routes.feign-consumer=/api-a/** 可用一行代码来代替上面两行,zuul.routes后面跟着的是服务名，服务名后面跟着的是路径规则，这种配置方式显然更简单。
+    # 用于配置Zuul的本地跳转
+    local:
+      path: /local/**
+      url: forward:/local
+      #默认情况下，敏感的头信息无法经过API网关进行传递，我们可以通过如下配置使之可以传递：
+    feign-consumer:
+      sensitiveHeaders:
+   #表示API网关在进行请求路由转发前为请求设置Host头信息。
+  add-host-header: true
+    #关闭Hystrix全局重试机制：
+    retryable: false
+    #关闭某一个服务的重试机制：
+    #zuul.routes.feign-consumer.retryable=false
+# API网关也将作为一个服务注册到eureka-server上
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8083/eureka/
+
+  #默认情况下，Eureka上所有注册的服务都会被Zuul创建映射关系来进行路由，如果想服务提供者hello-service只对服务消费者提供服务，
+  #不对外提供服务，如果使用默认的路由规则，则Zuul也会自动为hello-service创建映射规则，
+  #这个时候我们可以采用如下方式来让Zuul跳过hello-service服务，不为其创建路由规则：
+  #zuul.ignored-services=hello-service

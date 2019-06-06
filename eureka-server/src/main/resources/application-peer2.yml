@@ -1,0 +1,15 @@
+server:
+  port: 8081
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    #表示是否将自己注册到Eureka Server上，默认为true
+    register-with-eureka: false
+    #表示是否从Eureka Server上获取注册信息，默认为true
+    fetch-registry: false
+    service-url:
+      defaultZone: http://peer1:8083/eureka/
+spring:
+  application:
+    name: eureka-server2
