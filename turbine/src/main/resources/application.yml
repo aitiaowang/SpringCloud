@@ -2,24 +2,24 @@ spring:
   application:
     name: turbine
 
- #\u7ED9\u4E00\u4E2A\u670D\u52A1\u914D\u7F6E2\u4E2A\u7AEF\u53E3\uFF0C2003\uFF0C\u4E00\u4E2A\u8BBF\u95EE\u7AEF\u53E32002
+ #给一个服务配置2个端口，2003，一个访问端口2002
 server:
   port: 2002
 management:
   port: 2003
 eureka:
   instance:
-    hostname: 192.168.1.213
-    ip-address: 192.168.1.213
+    hostname: 192.168.98.188
+    ip-address: 192.168.98.188
   client:
     service-url:
       defaultZone: http://peer1:8083/eureka/
 
-#\u914D\u7F6EEureka\u4E2D\u7684serviceId\u5217\u8868\uFF0C\u8868\u660E\u76D1\u63A7\u54EA\u4E9B\u670D\u52A1(\u670D\u52A1\u6D88\u8D39\u8005)
+#配置Eureka中的serviceId列表，表明监控哪些服务(服务消费者)
 turbine:
-  app-config: ribbon-consumer
-  #\u6307\u5B9A\u4E86\u96C6\u7FA4\u540D\u79F0\u4E3Adefault\uFF0C\u5F53\u670D\u52A1\u6570\u91CF\u975E\u5E38\u591A\u7684\u65F6\u5019\uFF0C\u53EF\u4EE5\u542F\u52A8\u591A\u4E2ATurbine\u670D\u52A1\u6765\u6784\u5EFA\u4E0D\u540C\u7684\u805A\u5408\u96C6\u7FA4\uFF0C\u800C\u8BE5\u53C2\u6570\u53EF\u4EE5\u7528\u6765\u533A\u5206\u8FD9\u4E9B\u4E0D\u540C\u7684\u805A\u5408\u96C6\u7FA4\uFF0C
+  app-config: feign-consumer
+  #指定了集群名称为default，当服务数量非常多的时候，可以启动多个Turbine服务来构建不同的聚合集群，而该参数可以用来区分这些不同的聚合集群
   cluster-name-expression: "default"
-  #turbine.combine-host-port\u53C2\u6570\u8BBE\u7F6E\u4E3Atrue\uFF0C\u53EF\u4EE5\u8BA9\u540C\u4E00\u4E3B\u673A\u4E0A\u7684\u670D\u52A1\u901A\u8FC7\u4E3B\u673A\u540D\u4E0E\u7AEF\u53E3\u53F7\u7684\u7EC4\u5408\u6765\u8FDB\u884C\u533A\u5206\uFF0C\u9ED8\u8BA4\u60C5\u51B5\u4E0B\u4F1A\u4EE5host\u6765\u533A\u5206\u4E0D\u540C\u7684\u670D\u52A1\uFF0C
-  #\u8FD9\u4F1A\u4F7F\u5F97\u5728\u672C\u673A\u8C03\u8BD5\u7684\u65F6\u5019\uFF0C\u672C\u673A\u4E0A\u7684\u4E0D\u540C\u670D\u52A1\u805A\u5408\u6210\u4E00\u4E2A\u670D\u52A1\u6765\u7EDF\u8BA1
+  #turbine.combine-host-port 参数设置为true，可以让同一主机上的服务通过主机名与端口号的组合来进行区分，默认情况下会以host来区分不同的服务
+  #这会使得在本机调试的时候，本机上的不同服务聚合成一个服务来统计
   combine-host-port: true

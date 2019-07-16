@@ -17,7 +17,7 @@ eureka:
     #表示是否从Eureka Server上获取注册信息，默认为true
     fetch-registry: false
     service-url:
-      defaultZone: http://peer1:8083/eureka/
+      defaultZone: http://peer2:8081/eureka/
       #http://peer2:8081/eureka/
 spring:
   application:

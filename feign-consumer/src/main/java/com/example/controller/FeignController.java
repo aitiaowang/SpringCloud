@@ -17,6 +17,16 @@ public class FeignController {
     private FeignService feignService;
 
     /**
+     * 测试Feign负载均衡
+     * @author     sxk
+     * @date        2019/7/16 15:59
+     */
+    @RequestMapping("/testFeignLoadBalance")
+    public void testFeignLoadBalance(){
+        feignService.testFeignLoadBalance();
+    }
+
+    /**
      * 用于测试Feign 调用服务提供者的方法(服务提供者方法参数为: 无参)
      *
      * @return

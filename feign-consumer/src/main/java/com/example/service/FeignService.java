@@ -3,14 +3,24 @@ package com.example.service;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import entity.Book;
+
 /**
  * 测试Feign service 接口类
  * 通过@FeignClient注解来指定服务名进而绑定服务
  * 就是服务提供者的服务名
  */
 //hello-service大小写无所谓
-@FeignClient(value = "hello-service",fallback = HelloServiceFallback.class)
+@FeignClient(value = "hello-service", fallback = HelloServiceFallback.class)
 public interface FeignService {
+
+    /**
+     * 测试Feign负载均衡
+     *
+     * @author sxk
+     * @date 2019/7/16 16:01
+     */
+    @RequestMapping("/index")
+    void testFeignLoadBalance();
 
     /**
      * Feign 是基于接口方式调用服务提供者方法

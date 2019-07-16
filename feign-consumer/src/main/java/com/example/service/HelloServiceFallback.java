@@ -5,7 +5,18 @@ import entity.Book;
 /**
  * Feign中服务降级 回调方法类
  */
-public class HelloServiceFallback implements  FeignService{
+public class HelloServiceFallback implements FeignService {
+
+    /**
+     * 测试Feign负载均衡错误，降级方法
+     * @author     sxk
+     * @date        2019/7/16 16:03
+     */
+    @Override
+    public void testFeignLoadBalance() {
+        System.out.println("测试Feign负载均衡错误 ===> 服务降级");
+    }
+
     @Override
     public String hello() {
         return "hello error";

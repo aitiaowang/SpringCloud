@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8087
 spring:
   application:
     name: hello-service
@@ -12,5 +12,5 @@ eureka:
   client:
     service-url:
       #在两个注册中心注册
-      defaultZone: http://peer1:8083/eureka
-      #,http://peer2:8081/eureka
+      defaultZone: http://peer2:8081/eureka,http://peer1:8083/eureka
+      #,http://peer1:8083/eureka

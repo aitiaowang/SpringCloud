@@ -20,7 +20,6 @@ public class HelloController {
     public String index() {
         List<ServiceInstance> instances = client.getInstances("hello-service");
         for (int i = 0; i < instances.size(); i++) {
-           // log.info("/hello,host:" + instances.get(i).getHost() + ",service_id:" + instances.get(i).getServiceId());
             log.info("/hello,host: {},service_id: {}",instances.get(i).getHost(),instances.get(i).getServiceId());
         }
         return "Hello World";
