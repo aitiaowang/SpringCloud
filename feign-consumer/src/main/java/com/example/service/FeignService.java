@@ -1,8 +1,11 @@
 package com.example.service;
 
+import com.example.exception.RemoteClientFallBackFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import entity.Book;
+
+import java.rmi.Remote;
 
 /**
  * 测试Feign service 接口类
@@ -10,7 +13,10 @@ import entity.Book;
  * 就是服务提供者的服务名
  */
 //hello-service大小写无所谓
-@FeignClient(value = "hello-service", fallback = HelloServiceFallback.class)
+@FeignClient(value = "hello-service",
+        // fallback = HelloServiceFallback.class, // 2种服务降级处理
+        fallbackFactory = RemoteClientFallBackFactory.class
+)
 public interface FeignService {
 
     /**

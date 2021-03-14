@@ -57,6 +57,11 @@ hystrix:
 feign:
   hystrix:
     enabled: false
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
 
   #Hystrix针对某一个接口配置，比如/hello接口，那么可以按照下面这种写法，如下：
   # 设置熔断超时时间

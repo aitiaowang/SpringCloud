@@ -2,7 +2,7 @@ spring:
   application:
     name: turbine
 
- #给一个服务配置2个端口，2003，一个访问端口2002
+  #给一个服务配置2个端口，2003，一个访问端口2002
 server:
   port: 2002
 management:
@@ -15,7 +15,7 @@ eureka:
     service-url:
       defaultZone: http://peer1:8083/eureka/
 
-#配置Eureka中的serviceId列表，表明监控哪些服务(服务消费者)
+#配置Eureka中的serviceId列表，表明监控哪些服务(服务消费者),多个服务用逗号隔开
 turbine:
   app-config: feign-consumer
   #指定了集群名称为default，当服务数量非常多的时候，可以启动多个Turbine服务来构建不同的聚合集群，而该参数可以用来区分这些不同的聚合集群
