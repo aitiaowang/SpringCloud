@@ -4,6 +4,12 @@ eureka:
   server:
     #使用eureka.server.enable-self-preservation=false来关闭保护机制，这样可以确保注册中心中不可用的实例被及时的剔除。
     enable-self-preservation: false
+    #指定EvictionTask定时任务的调度频率，用于剔除过期的实例
+    eviction-interval-timer-in-ms: 60000
+    #是否使用只读的response-cache  缓存参数
+    use-read-only-response-cache: true
+    #设置readWriteCacheMap的expireAfterWrite参数，指定写入多长时间后过期
+    response-cache-auto-expiration-in-seconds: 180
   instance:
     hostname: peer1
   client:
