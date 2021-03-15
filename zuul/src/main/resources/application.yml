@@ -3,7 +3,7 @@ server:
   port: 8090
 spring:
   application:
-    name: api-gateway
+    name: api-zuul
 
 # 路由规则配置
 zuul:
